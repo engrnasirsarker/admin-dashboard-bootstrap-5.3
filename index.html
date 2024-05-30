@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">   
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+		<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <!-- sidebar start -->
+    <section class="collapse-menu scroll-menu" id="sidebar">
+      <ul class="sidebar-menu">
+        <div class="bg-light sticky-top sidebar-header py-1">
+          <h4 class="p-1 text-center">
+          <router-link to="/"> 
+            <span>Aloron Admin</span>
+          </router-link></h4>
+        </div>
+      
+        <div class="py-1 d-flex ms-3">
+          <div class="mt-2 ">
+              <img src="images/admin-avatar.png" style="width:30px;" />
+          </div>
+        
+          <div class="admin-info ms-2">
+            <div class="font-strong">Admin</div>
+            <small>Role:-
+              <span>administator</span>
+            </small>
+          </div>
+            
+        </div>
+        <li class="sidebar-dashboard">
+          <i class="fa fa-dashboard"></i> <span>Dashboards</span>
+        </li>
+       
+        <li> 
+            <a href="#">
+              <i class="fa fa-tags"></i> <span> Categoires</span>
+              <i class="fa fa-angle-left position-absolute end-0"></i>
+            </a>
+            <ul class="sidebar-submenu">
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> Category
+                </a>
+              </li>  
+              
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> subCategory
+                </a>
+              </li> 
+
+            </ul>
+        </li>
+        <li> 
+            <a href="#">
+              <i class="fa fa-tags"></i> <span> Categoires</span>
+              <i class="fa fa-angle-left position-absolute end-0"></i>
+            </a>
+            <ul class="sidebar-submenu">
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> Category
+                </a>
+              </li>  
+              
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> subCategory
+                </a>
+              </li> 
+
+            </ul>
+        </li>
+        <li> 
+            <a href="#">
+              <i class="fa fa-tags"></i> <span> Categoires</span>
+              <i class="fa fa-angle-left position-absolute end-0"></i>
+            </a>
+            <ul class="sidebar-submenu">
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> Category
+                </a>
+              </li>  
+              
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> subCategory
+                </a>
+              </li> 
+
+            </ul>
+        </li>
+        <li> 
+            <a href="#">
+              <i class="fa fa-tags"></i> <span> Categoires</span>
+              <i class="fa fa-angle-left position-absolute end-0"></i>
+            </a>
+            <ul class="sidebar-submenu">
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> Category
+                </a>
+              </li>  
+              
+              <li>
+                <a href=""> 
+                  <i class="fa-regular fa-circle"></i> subCategory
+                </a>
+              </li> 
+
+            </ul>
+        </li>
+      </ul>
+    </section>
+    <!-- sidebar ends -->
+    <div class="page-content"  id="content">
+      <!-- start header -->
+      <nav class="py-2 sticky-top bg-light border-bottom" id="topbar">
+        <div class="d-flex flex-wrap">
+          <ul class="nav me-auto">
+            <a id="sidebarCollapse"  class="btn ms-2  btn-sm" href="#">
+              <i class="fa fa-bars"></i>
+            </a>
+            <span class="mx-2">Aloron POS</span>
+    
+            <!-- <span id='date-time' class="d-none d-md-inline-block"></span> -->
+            
+          </ul>
+          <!-- right side navbar start -->
+          <ul class="nav"> 
+              <span  v-if="can('sale-create')">
+                <a href="#" class="btn btn-sm btn-success me-1" @click="navigateToPos">
+                  <i class="fa fa-desktop"></i> POS
+                </a>
+              </span>          
+              <span  v-if="can('purchase-create')">
+                <router-link to="/purchase-create" class="btn btn-sm btn-success me-1">
+                  <i class="fa fa-shopping-basket"></i>
+                </router-link>
+              </span>          
+              <span  v-if="can('sale-create')">
+                <router-link to="/sale-create" class="btn btn-sm btn-success me-1">
+                  <i class="fa fa-shopping-cart"></i>
+                </router-link>
+              </span>
+              
+            <li class="nav-item">
+              <span class="btn btn-sm btn-success me-1 d-none d-sm-inline-block">
+                <i class="fa fa-arrows-alt" 
+                @click="handleFullScreen"
+               ></i>
+               </span>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="me-4 ms-2" role="button" data-bs-toggle="dropdown" >
+                <img src="images/admin-avatar.png" style="width:20px" />
+              </a>
+    
+              <div class="dropdown-menu dropdown-menu-right" >
+                <strong class="ms-4">{{current_user.name}}</strong>
+                <router-link class="dropdown-item" to="/user-profile">
+                  <i class="fa fa-user"></i> Profile
+                </router-link>
+                
+                <button class="dropdown-item" @click="logout">
+                  <i class="fa fa-sign-out"></i> Logout
+                </button>
+                
+              </div> 
+            </li>
+          </ul>
+          <!-- right side navbar end -->
+        </div>
+      </nav>          
+      <!-- end header -->
+      
+      <div class="px-3 py-2">
+
+        <!-- Dashboard card section start -->
+        <div class="row dashboard-card">
+          <div class="my-2 col-md-6 col-xl-3">
+            <div class="card p-1 ait-bg-warning ">
+              <div class="card-body py-2">
+                <div class="d-flex">
+                  <div class="flex-grow-1">
+                    <h5>Total Members</h5>
+                    <h4><b>50000000</b></h4>
+                  </div>
+                  <div>
+                    <a href="" class="btn btn-warning d-inline-flex ms-1">
+                      <i class="fa fa-arrow-right mt-1 me-1"> </i> View
+                    </a>
+                  </div>                 
+                  
+                </div>                
+              </div> 
+            </div>
+          </div>
+          <div class="my-2 col-md-6 col-xl-3">
+            <div class="card p-1 ait-bg-success">
+              <div class="card-body py-2">
+                <div class="d-flex">
+                  <div class="flex-grow-1">
+                    <h5>Total Members</h5>
+                    <h4>50000000</h4>
+                  </div>
+                  <div>
+                    <a href="" class="btn btn-success d-inline-flex ms-1">
+                      <i class="fa fa-arrow-right mt-1 me-1"> </i> View
+                    </a>
+                  </div>
+                </div>      
+              </div>
+            </div>
+          </div>
+          <div class="my-2 col-md-6 col-xl-3">
+            <div class="card p-1 ait-bg-danger">
+              <div class="card-body py-2">
+                <div class="d-flex">
+                  <div class="flex-grow-1">
+                    <h5>Total Members</h5>
+                    <h4>50000000</h4>
+                  </div>
+                  <div>
+                    <a href="" class="btn btn-danger d-inline-flex ms-1">
+                        <i class="fa fa-arrow-right mt-1 me-1"> </i> View  
+                    </a>
+                  </div>
+                </div>      
+              </div>
+            </div>
+          </div>
+          <div class="my-2 col-md-6 col-xl-3">
+            <div class="card p-1 ait-bg-info">
+              <div class="card-body py-2 ">
+                <div class="d-flex">
+                  <div class="flex-grow-1">
+                    <h5>Total Members</h5>
+                    <h4>50000000</h4>
+                  </div>
+                  <div>
+                    <a href="" class="btn btn-primary d-inline-flex ms-1">
+                      <i class="fa fa-arrow-right mt-1 me-1"> </i> View
+                    </a>
+                  </div>
+                </div>      
+              </div>
+            </div>
+          </div>          
+          
+        </div>
+        <!-- Dashboard card section start -->
+        <div class="row mb-2">
+          <div class="col-md-6 my-2">
+            <div class="card">
+              <div class="card-header">Pie Chart</div>
+              <div class="card-body">
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 my-2">
+             <div class="card">
+              <div class="card-header">Bar Chart</div>
+              <div class="card-body">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- recent transition start -->
+        <div class="card">
+          <div class="card-header">
+            Recent Transaction
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Member</th>
+                    <th>Account No</th>
+                    <th>Amount</th>
+                    <th>Dr/Cr</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>05-03-2023</td>
+                    <td>Nasir</td>
+                    <td>234234</td>
+                    <td>6000</td>
+                    <td>Credit</td>
+                    <td>Witdrow</td>
+                    <td>Success</td>
+                    <td>
+                      <!-- Example single danger button -->
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          Action
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- recent transition end -->
+
+        <footer class="d-none d-md-block">
+          <div class="container ">
+              <div class="row">
+                  <div class="col">
+                      &copy; {{new Date().getFullYear()}} All Right Reserve | Design & Developed by 
+                      <a href="https:www.aloronit.com/" target="_blank">Aloron IT.</a>
+                  </div>
+                  
+                  <div class="col col-lg-3">
+                  <span>Version: 1.0.30</span>
+                  </div>
+              </div>
+          </div>
+      </footer>
+      </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
